@@ -38,7 +38,7 @@ function gameInitialize() {
     canvas.width = screenWidth;
     canvas.height = screenHeight;
     
-    document.addEventListener("Keydown", KeyboardHandler );
+    document.addEventListener("keydown", keyboardHandler );
 }
 
 function gameLoop() {
@@ -86,7 +86,7 @@ function gameDraw() {
      if(snakeDirection == "down") {
          snakeHeadY++;
      }
-     else {
+     else if(snakeDirection == "right"){
          snakeHeadX++;
      }
      
@@ -116,8 +116,22 @@ function gameDraw() {
  function setFoodPosition() {
      var randomX = Math.floor(Math.random() * (screenWidth));
      var randomY = Math.floor(Math.random() * (screenHeight));
+     
+     food.x = Math.floor(randomX / snakeSize);
+     food.y = Math.floor(randomY / snakeSize);
  }
  
- function KeyboardHandler(event) {
+ /* --------------------------------------------------------------------------
+  *  Input Functions
+  * --------------------------------------------------------------------------
+  */
+ function keyboardHandler(event) {
      console.log(event);
+     
+     if(event.keyCode == "39") {
+         snakeDirection = "right"; 
+     }
+     else if(event.keyCode == "40") {
+         snakeDirection = "down";
+     }
  }
